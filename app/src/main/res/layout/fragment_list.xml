@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/text_list"
+        android:id="@+id/product_list_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -21,7 +21,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/subject_recycler_view"
+        android:id="@+id/product_list"
         android:layout_width="385dp"
         android:layout_height="585dp"
         android:layout_marginTop="54dp"

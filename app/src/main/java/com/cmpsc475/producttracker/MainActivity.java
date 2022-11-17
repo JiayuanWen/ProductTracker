@@ -26,7 +26,8 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
 
-
+        //For testint recycler list view, comment out in final release.
+        
     }
 
 }
