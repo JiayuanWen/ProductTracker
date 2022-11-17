@@ -37,7 +37,7 @@
                     android:layout_marginLeft="10dp"
 
                     android:layout_weight="1"
-                    android:text="Product Name"
+                    android:text="Seagate 4TB Drive"
                     android:textSize="20dp"
                     android:textStyle="bold" />
 
