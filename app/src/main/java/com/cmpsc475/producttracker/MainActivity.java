@@ -9,6 +9,8 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,8 +28,16 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
 
+        //RecyclerView recyclerView = findViewById(R.id.product_list);
+        //recyclerView.setHasFixedSize(true);
+        //recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
         //For testint recycler list view, comment out in final release.
-        
+        ProductData[] productData = new ProductData[]{
+                new ProductData("Seagate 4TB Drive",R.drawable.image_placeholder,2014,8,12),
+                new ProductData("Seagate 4TB Drive",R.drawable.image_placeholder,2014,8,12),
+                new ProductData("Seagate 4TB Drive",R.drawable.image_placeholder,2014,8,12),
+        };
     }
 
 }
