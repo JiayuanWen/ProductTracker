@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/text_home"
+        android:id="@+id/text_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -22,15 +22,16 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/subject_recycler_view"
-        android:layout_width="391dp"
-        android:layout_height="663dp"
+        android:layout_width="385dp"
+        android:layout_height="585dp"
         android:layout_marginTop="54dp"
         android:layout_marginBottom="14dp"
         android:scrollbars="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/add_product_button"
@@ -40,12 +41,12 @@
         android:layout_margin="16dp"
         android:layout_marginStart="347dp"
         android:layout_marginEnd="339dp"
-        android:contentDescription="@string/add_subject"
+        android:contentDescription="@string/add_product"
         android:src="@drawable/ic_add_black_24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.877" />
 </androidx.constraintlayout.widget.ConstraintLayout>
