@@ -1,6 +1,8 @@
 package com.cmpsc475.producttracker;
 
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -45,4 +47,10 @@ public class MainActivity extends AppCompatActivity {
          */
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.bar_menu_top, menu);
+        return true;
+    }
 }
