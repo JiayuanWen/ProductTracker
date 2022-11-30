@@ -7,6 +7,9 @@ import android.view.MenuInflater;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -29,23 +32,8 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
-
-        /*
-        RecyclerView recyclerView = findViewById(R.id.product_list);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        //For testint recycler list view, comment out in final release.
-        ProductData[] productData = new ProductData[]{
-                new ProductData("Seagate 4TB Drive",R.drawable.image_placeholder,2014,8,12),
-                new ProductData("Seagate 4TB Drive",R.drawable.image_placeholder,2014,8,12),
-                new ProductData("Seagate 4TB Drive",R.drawable.image_placeholder,2014,8,12),
-        };
-
-        ProductDateAdapter productDateAdapter = new ProductDateAdapter(productData,MainActivity.this);
-        recyclerView.setAdapter(productDateAdapter);
-         */
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

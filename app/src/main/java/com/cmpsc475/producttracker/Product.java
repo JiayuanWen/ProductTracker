@@ -1,6 +1,6 @@
 package com.cmpsc475.producttracker;
 
-public class ProductData {
+public class Product {
     // Attributes
     private String productName;
     private Integer productImage;
@@ -21,7 +21,7 @@ public class ProductData {
     // End of Attributes
 
     // Class Ccnstructor (Without warranty)
-    public ProductData(
+    public Product(
             String productName,
             Integer productImage,
 
@@ -45,7 +45,7 @@ public class ProductData {
     // End of Class Constructor (Without warranty)
 
     // Class Ccnstructor (With warranty)
-    public ProductData(
+    public Product(
             String productName,
             Integer productImage,
 

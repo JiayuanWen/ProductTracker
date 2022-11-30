@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -14,18 +13,23 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.cmpsc475.producttracker.MainActivity;
-import com.cmpsc475.producttracker.ProductData;
-import com.cmpsc475.producttracker.ProductDateAdapter;
+import com.cmpsc475.producttracker.ProductListAdapter;
 import com.cmpsc475.producttracker.R;
+import com.cmpsc475.producttracker.Product;
+import java.util.ArrayList;
 
 public class ListFragment extends Fragment {
 
     private ListViewModel listViewModel;
+    private ArrayList<Product> productArrayList;
+    private String[] productTitle;
+    private int[] imageResourceID;
+    private RecyclerView recyclerview;
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState, MainActivity activity) {
+                             ViewGroup container, Bundle savedInstanceState) {
         listViewModel =
                 ViewModelProviders.of(this).get(ListViewModel.class);
         View root = inflater.inflate(R.layout.fragment_list, container, false);
@@ -37,20 +41,34 @@ public class ListFragment extends Fragment {
             }
         });
 
-        RecyclerView recyclerView = root.findViewById(R.id.product_list);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(activity));
-
-        //For testint recycler list view, comment out in final release.
-        ProductData[] productData = new ProductData[]{
-                new ProductData("Seagate 4TB Drive",R.drawable.image_placeholder,2014,8,12),
-                new ProductData("Seagate 4TB Drive",R.drawable.image_placeholder,2014,8,12),
-                new ProductData("Seagate 4TB Drive",R.drawable.image_placeholder,2014,8,12),
-        };
-
-        ProductDateAdapter productDateAdapter = new ProductDateAdapter(productData, activity);
-        recyclerView.setAdapter(productDateAdapter);
 
         return root;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle saveInstanceState) {
+        super.onViewCreated(view, saveInstanceState);
+
+        dataInitialize();
+
+        recyclerview = view.findViewById(R.id.product_list);
+
+        recyclerview.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerview.setHasFixedSize(true);
+
+        ProductListAdapter listAdapter = new ProductListAdapter(getContext(),productArrayList);
+        recyclerview.setAdapter(listAdapter);
+        listAdapter.notifyDataSetChanged();
+    }
+
+    private void dataInitialize() {
+
+        productArrayList = new ArrayList<>();
+
+        for (int i=0; i < 3; i++) {
+            Product prod = new Product("Seagate 4TB Drive",R.drawable.image_placeholder,2014,8,12);
+            productArrayList.add(prod);
+        }
+
     }
 }
