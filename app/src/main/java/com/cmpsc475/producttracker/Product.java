@@ -1,26 +1,54 @@
 package com.cmpsc475.producttracker;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+@Entity
 public class Product {
-    // Attributes
+
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "id")
+    private long productID;
+
+    @NonNull
+    @ColumnInfo(name = "name")
     private String productName;
+    @ColumnInfo(name = "image_src")
     private Integer productImage;
 
-    private Integer yearCurrent; //Current time
+    //Current time used for calculating time left, not needed for DB
+    private Integer yearCurrent;
     private Integer monthCurrent;
     private Integer dayCurrent;
 
-    private Integer yearBought; //For tracking product time owned
+    //For tracking product time owned
+    @NonNull
+    @ColumnInfo(name = "year_bought")
+    private Integer yearBought;
+    @NonNull
+    @ColumnInfo(name = "month_bought")
     private Integer monthBought;
+    @NonNull
+    @ColumnInfo(name = "month_bought")
     private Integer dayBought;
 
+    @NonNull
+    @ColumnInfo(name = "warranty")
     private Boolean warranty;
 
-    private Integer yearExpire; //For warranty
+    //For warranty
+    @ColumnInfo(name = "warran_year_expire")
+    private Integer yearExpire;
+    @ColumnInfo(name = "warran_month_expire")
     private Integer monthExpire;
+    @ColumnInfo(name = "warran_day_expire")
     private Integer dayExpire;
-    // End of Attributes
 
-    // Class Ccnstructor (Without warranty)
+
+    // Class Constructor (Without warranty)
     public Product(
             String productName,
             Integer productImage,
