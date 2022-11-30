@@ -33,6 +33,7 @@ public class ListFragment extends Fragment {
         listViewModel =
                 ViewModelProviders.of(this).get(ListViewModel.class);
         View root = inflater.inflate(R.layout.fragment_list, container, false);
+        /*
         final TextView textView = root.findViewById(R.id.product_list_title);
         listViewModel.getText().observe(this, new Observer<String>() {
             @Override
@@ -40,6 +41,7 @@ public class ListFragment extends Fragment {
                 textView.setText(s);
             }
         });
+        //*/
 
 
         return root;

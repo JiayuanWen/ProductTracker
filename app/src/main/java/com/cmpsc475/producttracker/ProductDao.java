@@ -1,3 +1,4 @@
+/*
 package com.cmpsc475.producttracker;
 
 import androidx.room.Dao;
@@ -21,3 +22,4 @@ public interface ProductDao {
     @Delete
     void deleteProduct(Product product);
 }
+//*/

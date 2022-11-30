@@ -1,3 +1,4 @@
+/*
 package com.cmpsc475.producttracker;
 
 import androidx.room.Database;
@@ -7,3 +8,4 @@ import androidx.room.RoomDatabase;
 public abstract class ProductDB extends RoomDatabase {
     public abstract ProductDao productDao();
 }
+//*/
