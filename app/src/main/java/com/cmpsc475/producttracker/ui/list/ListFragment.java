@@ -49,7 +49,7 @@ public class ListFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle saveInstanceState) {
         super.onViewCreated(view, saveInstanceState);
 
-        dataInitialize();
+        importTestData();
 
         recyclerview = view.findViewById(R.id.product_list);
 
@@ -61,14 +61,29 @@ public class ListFragment extends Fragment {
         listAdapter.notifyDataSetChanged();
     }
 
-    private void dataInitialize() {
+    private void importTestData() {
 
         productArrayList = new ArrayList<>();
 
+        /*
         for (int i=0; i < 3; i++) {
             Product prod = new Product("Seagate 4TB Drive",R.drawable.image_placeholder,2014,8,12);
             productArrayList.add(prod);
         }
+        */
+
+        Product prod1 = new Product("Seagate 4TB HDD",R.drawable.seagate4tb,2014,8,12);
+        productArrayList.add(prod1);
+        Product prod2 = new Product("SanDisk 32GB USB",R.drawable.image_placeholder,2014,8,12);
+        productArrayList.add(prod2);
+        Product prod3 = new Product("Nvidia RTX 3080 GPU",R.drawable.rtx3080,2014,8,12);
+        productArrayList.add(prod3);
+        Product prod4 = new Product("Toshiba 2TB HDD",R.drawable.image_placeholder,2014,8,12);
+        productArrayList.add(prod4);
+    }
+
+    private void addData() {
+        productArrayList = new ArrayList<>();
 
     }
 }
