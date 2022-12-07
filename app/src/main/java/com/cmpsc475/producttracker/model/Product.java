@@ -1,9 +1,10 @@
-package com.cmpsc475.producttracker;
+package com.cmpsc475.producttracker.model;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity
@@ -19,11 +20,6 @@ public class Product {
     @ColumnInfo(name = "image_src")
     private Integer productImage;
 
-    //Current time used for calculating time left, not needed for DB
-    private Integer yearCurrent;
-    private Integer monthCurrent;
-    private Integer dayCurrent;
-
     //For tracking product time owned
     @NonNull
     @ColumnInfo(name = "year_bought")
@@ -32,7 +28,7 @@ public class Product {
     @ColumnInfo(name = "month_bought")
     private Integer monthBought;
     @NonNull
-    @ColumnInfo(name = "month_bought")
+    @ColumnInfo(name = "day_bought")
     private Integer dayBought;
 
     @NonNull
@@ -48,6 +44,9 @@ public class Product {
     private Integer dayExpire;
 
 
+    public Product() {}
+
+    @Ignore
     // Class Constructor (Without warranty)
     public Product(
             String productName,
@@ -72,7 +71,8 @@ public class Product {
     }
     // End of Class Constructor (Without warranty)
 
-    // Class Ccnstructor (With warranty)
+    @Ignore
+    // Class Constructor (With warranty)
     public Product(
             String productName,
             Integer productImage,
@@ -101,6 +101,8 @@ public class Product {
     // End of Class Constructor (With warranty)
 
     // Get Methods
+    public long getProductID() { return productID; }
+
     public String getProductName() {
         return productName;
     }
@@ -108,38 +110,66 @@ public class Product {
         return productImage;
     }
 
-    public Integer getBoughtYear() {
+    public Integer getYearBought() {
         return yearBought;
     }
-    public Integer getBoughtMonth() {
+    public Integer getYear() {return yearBought;}
+    public Integer getMonthBought() {
         return monthBought;
     }
-    public Integer getBoughtDay() {
+    public Integer getMonth() {return monthBought;}
+    public Integer getDayBought() {
         return dayBought;
     }
+    public Integer getDay() {return dayBought;}
 
-    public Integer getExpireYear() {
+    public Integer getYearExpire() {
         return yearExpire;
     }
-    public Integer getExpireMonth() {
+    public Integer getMonthExpire() {
         return monthExpire;
     }
-    public Integer getExpireDay() {
+    public Integer getDayExpire() {
         return dayExpire;
     }
 
-    public Integer getCurrentYear() {
-        return yearCurrent;
-    }
-    public Integer getCurrentMonth() {
-        return monthCurrent;
-    }
-    public Integer getCurrentDay() {
-        return dayCurrent;
-    }
-
-    public Boolean hasWarranty() {
+    public Boolean getWarranty() {
         return warranty;
     };
     // End of Get Methods
+
+    //Set Methods
+    public void setProductID(long newID) { productID = newID; }
+
+    public void setProductName(String newName) {
+        productName = newName;
+    }
+    public void setProductImage(Integer newImage) {
+        productImage = newImage;
+    }
+
+    public void setYearBought(Integer newYear) {
+        yearBought = newYear;
+    }
+    public void setMonthBought(Integer newMonth) {
+        monthBought = newMonth;
+    }
+    public void setDayBought(Integer newDay) {
+        dayBought = newDay;
+    }
+
+    public void setYearExpire(Integer newYearExpire) {
+        yearExpire = newYearExpire;
+    }
+    public void setMonthExpire(Integer newMonthExpire) {
+        monthExpire = newMonthExpire;
+    }
+    public void setDayExpire(Integer newDayExpire) {
+        dayExpire = newDayExpire;
+    }
+
+    public void setWarranty(Boolean warrantyStatus) {
+        warranty = warrantyStatus;
+    };
+    //End of Set Methods
 }

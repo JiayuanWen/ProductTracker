@@ -80,7 +80,7 @@
                     android:textStyle="bold" />
 
                 <Button
-                    android:id="@+id/deleteProduct"
+                    android:id="@+id/delete_product"
                     android:layout_width="37dp"
                     android:layout_height="23dp"
                     android:layout_marginLeft="500dp"
