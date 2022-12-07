@@ -58,9 +58,9 @@ public class Product {
     {
         //Since we have no warranty, set all to 0
         this.warranty = false;
-        this.yearExpire = 0;
-        this.monthExpire = 0;
-        this. dayExpire = 0;
+        this.yearExpire = -1;
+        this.monthExpire = -1;
+        this. dayExpire = -1;
 
         this.productName = productName;
         this.productImage = productImage;
@@ -126,12 +126,15 @@ public class Product {
     public Integer getYearExpire() {
         return yearExpire;
     }
+    public Integer getYearExp() {return yearExpire;}
     public Integer getMonthExpire() {
         return monthExpire;
     }
+    public Integer getMonthExp() {return monthExpire;}
     public Integer getDayExpire() {
         return dayExpire;
     }
+    public Integer getDayExp() {return dayExpire;}
 
     public Boolean getWarranty() {
         return warranty;

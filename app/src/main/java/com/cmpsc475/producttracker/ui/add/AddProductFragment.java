@@ -65,6 +65,34 @@ public class AddProductFragment extends Fragment {
                 text = (EditText) view.findViewById(R.id.product_name_entry);
                 String productName = text.getText().toString();
 
+                int dayExpire = 0;
+                text = (EditText) view.findViewById(R.id.day_expire);
+                if (text.getText().toString().trim().length() <= 0) {
+                    dayExpire = -1;
+
+                } else {
+                    dayExpire = Integer.parseInt(text.getText().toString());
+                }
+
+
+                int yearExpire = 0;
+                text = (EditText) view.findViewById(R.id.year_expire);
+                if (text.getText().toString().trim().length() <= 0) {
+                    yearExpire = -1;
+
+                } else {
+                    yearExpire = Integer.parseInt(text.getText().toString());
+                }
+
+                int monthExpire = 0;
+                text = (EditText) view.findViewById(R.id.month_expire);
+                if (text.getText().toString().trim().length() <= 0) {
+                    monthExpire = -1;
+
+                } else {
+                    monthExpire = Integer.parseInt(text.getText().toString());
+                }
+
                 text = (EditText) view.findViewById(R.id.month_bought);
                 if (text.getText().toString().trim().length() <= 0) { //Fail save
                     FragmentTransaction transaction = getFragmentManager().beginTransaction();
@@ -104,7 +132,7 @@ public class AddProductFragment extends Fragment {
                 }
                 int yearBought = Integer.parseInt(text.getText().toString());
 
-                //Date correction
+                //Date correction for purchase date
                 if (
                         monthBought == 1 ||
                         monthBought == 3 ||
@@ -157,13 +185,85 @@ public class AddProductFragment extends Fragment {
                     }
                 }
 
-                if (monthBought > 12) {
-                    yearBought++;
-                    monthBought = monthBought - 12;
+                //Date correction for warranty expiration
+                if (monthExpire > 12) {
+                    yearExpire++;
+                    monthExpire = monthExpire - 12;
                 }
 
+                if (
+                        monthExpire == 1 ||
+                                monthExpire == 3 ||
+                                monthExpire == 5 ||
+                                monthExpire == 7 ||
+                                monthExpire == 8 ||
+                                monthExpire == 10 ||
+                                monthExpire == 12
+                ) {
+                    if (dayExpire > 31) {
+                        monthExpire++;
+                        dayExpire = dayExpire - 31;
+                    }
+                }
+                if (
+                        monthExpire == 4 ||
+                                monthExpire == 6 ||
+                                monthExpire == 9 ||
+                                monthExpire == 11
+                ) {
+                    if (dayExpire > 30) {
+                        monthExpire++;
+                        dayExpire = dayExpire - 30;
+                    }
+                }
+
+                if (yearExpire % 400 == 0) {
+                    if (monthExpire == 2) {
+                        if (dayExpire > 29) {
+                            monthExpire++;
+                        }
+                    }
+                } else if (yearExpire % 100 == 0) {
+                    if (monthExpire == 2) {
+                        if (dayExpire > 28) {
+                            monthExpire++;
+                        }
+                    }
+                } else if (yearExpire % 4 == 0) {
+                    if (monthExpire == 2) {
+                        if (dayExpire > 29) {
+                            monthExpire++;
+                        }
+                    }
+                } else {
+                    if (monthExpire == 2) {
+                        if (dayExpire > 28) {
+                            monthExpire++;
+                        }
+                    }
+                }
+
+                if (monthExpire > 12) {
+                    yearExpire++;
+                    monthExpire = monthExpire - 12;
+                }
+
+
                 Product newProduct;
-                newProduct = new Product(productName,R.drawable.image_placeholder,yearBought,monthBought,dayBought);
+                if (yearExpire == -1 && monthExpire == -1 && dayExpire == -1) {
+                    newProduct = new Product(productName,R.drawable.image_placeholder,yearBought,monthBought,dayBought);
+                    mProductListViewModel.addProduct(newProduct);
+
+                    FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                    transaction.setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out);
+                    transaction.replace(R.id.nav_host_fragment, new ListFragment());
+                    transaction.commit();
+
+                    Toast.makeText(getContext(),"Item added successfully",Toast.LENGTH_LONG).show();
+
+                    return;
+                }
+                newProduct = new Product(productName,R.drawable.image_placeholder,yearBought,monthBought,dayBought,yearExpire,monthExpire,dayExpire);
                 mProductListViewModel.addProduct(newProduct);
 
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();

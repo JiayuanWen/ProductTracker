@@ -47,17 +47,16 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull ProductListViewHolder holder, int position) {
-        Button deleteButton;
-
         Product product = productArrayList.get(position);
         holder.productTitle.setText(product.getProductName());
         holder.productImage.setImageResource(product.getProductImage());
 
+        Calendar calendar = Calendar.getInstance();
+
+        // Time since owned
         int dayBought = product.getDay();
         int yearBought = product.getYear();
         int monthBought = product.getMonth();
-
-        Calendar calendar = Calendar.getInstance();
 
         int yearCurrent = calendar.get(Calendar.YEAR);
         int monthCurrent = calendar.get(Calendar.MONTH);
@@ -126,12 +125,87 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
                 }
             }
         }
-        /*
-        holder.purchasedYear.setText(year);
-        holder.purchasedMonth.setText(month);
-        holder.purchasedDay.setText(day);
-        // */
-            holder.purchasedTime.setText(yearDiff+" Years, "+monthDiff+" months, "+dayDiff+" days");
+
+        holder.purchasedTime.setText(yearDiff+" Years, "+monthDiff+" months, "+dayDiff+" days");
+
+        // Time til warranty expire
+        int dayExpire = product.getDayExp();
+        int yearExpire = product.getYearExp();
+        int monthExpire = product.getMonthExp();
+
+        if (dayExpire == 0 && yearExpire == 0 && monthExpire == 0) {
+            holder.warrantyExpireTime.setText("N/A or Expired");
+            return;
+        }
+        yearCurrent = calendar.get(Calendar.YEAR);
+        monthCurrent = calendar.get(Calendar.MONTH);
+        dayCurrent = calendar.get(Calendar.DAY_OF_MONTH);
+
+        yearDiff = (yearExpire - yearCurrent);
+        monthDiff = monthExpire - monthCurrent;
+        dayDiff = dayExpire - dayCurrent;
+        if (monthDiff < 0) {
+            yearDiff--;
+            monthDiff = 12 + monthDiff;
+        }
+
+        if (
+                monthBought == 1 ||
+                        monthBought == 3 ||
+                        monthBought == 5 ||
+                        monthBought == 7 ||
+                        monthBought == 8 ||
+                        monthBought == 10 ||
+                        monthBought == 12
+        ) {
+            if (dayDiff <= 0) {
+                monthBought--;
+                dayDiff = 31 + dayDiff;
+            }
+        }
+        if (
+                monthBought == 4 ||
+                        monthBought == 6 ||
+                        monthBought == 9 ||
+                        monthBought == 11
+        ) {
+            if (dayDiff <= 0) {
+                monthBought--;
+                dayDiff= 30 + dayDiff;
+            }
+        }
+
+        if (yearBought % 400 == 0) {
+            if (monthBought == 2) {
+                if (dayDiff <= 0) {
+                    monthBought--;
+                    dayDiff = 29 + dayDiff;
+                }
+            }
+        } else if (yearBought % 100 == 0) {
+            if (monthBought == 2) {
+                if (dayDiff <= 0) {
+                    monthBought--;
+                    dayDiff = 28 + dayDiff;
+                }
+            }
+        } else if (yearBought % 4 == 0) {
+            if (monthBought == 2) {
+                if (dayBought <= 0) {
+                    monthBought--;
+                    dayDiff = 29 + dayDiff;
+                }
+            } else {
+                if (monthBought == 2) {
+                    if (dayDiff <= 0) {
+                        monthBought--;
+                        dayDiff = 28 + dayDiff;
+                    }
+                }
+            }
+        }
+
+        holder.warrantyExpireTime.setText(yearDiff+" Years, "+monthDiff+" months, "+dayDiff+" days");
 
     }
 
@@ -146,6 +220,7 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
         TextView productTitle;
 
         TextView purchasedTime;
+        TextView warrantyExpireTime;
 
         TextView purchasedYear;
         TextView purchasedMonth;
@@ -161,6 +236,8 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
             productTitle = itemView.findViewById(R.id.product_name);
 
             purchasedTime = itemView.findViewById(R.id.product_time);
+
+            warrantyExpireTime = itemView.findViewById(R.id.warranty_time);
 
             /*
             purchasedYear = itemView.findViewById(R.id.year_bought);
