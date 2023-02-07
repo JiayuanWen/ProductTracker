@@ -133,10 +133,6 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
         int yearExpire = product.getYearExp();
         int monthExpire = product.getMonthExp();
 
-        if (dayExpire == 0 && yearExpire == 0 && monthExpire == 0) {
-            holder.warrantyExpireTime.setText("N/A or Expired");
-            return;
-        }
         yearCurrent = calendar.get(Calendar.YEAR);
         monthCurrent = calendar.get(Calendar.MONTH);
         dayCurrent = calendar.get(Calendar.DAY_OF_MONTH);
@@ -207,6 +203,10 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
 
         holder.warrantyExpireTime.setText(yearDiff+" Years, "+monthDiff+" months, "+dayDiff+" days");
 
+        if (dayDiff <= 0 || yearDiff <= 0 || monthDiff <= 0) {
+            holder.warrantyExpireTime.setText("N/A or Expired");
+            return;
+        }
     }
 
     @Override
