@@ -8,5 +8,11 @@
         android:title="About app"
         app:showAsAction="never"
         />
+    <item
+        android:id="@+id/quit_app"
+        android:icon="@drawable/ic_baseline_more_vert_24"
+        android:title="Exit app"
+        app:showAsAction="never"
+        />
 
 </menu>

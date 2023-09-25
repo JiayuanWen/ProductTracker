@@ -28,6 +28,6 @@ public interface ProductDao {
     void updateProduct(Product product);
 
     @Delete
-    void deleteProduct(Product product);
+    void deleteProduct(Product productID);
 }
 //*/

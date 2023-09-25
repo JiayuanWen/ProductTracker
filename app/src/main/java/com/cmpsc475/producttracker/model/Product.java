@@ -47,32 +47,7 @@ public class Product {
     public Product() {}
 
     @Ignore
-    // Class Constructor (Without warranty)
-    public Product(
-            String productName,
-            Integer productImage,
-
-            Integer yearBought,
-            Integer monthBought,
-            Integer dayBought)
-    {
-        //Since we have no warranty, set all to 0
-        this.warranty = false;
-        this.yearExpire = -1;
-        this.monthExpire = -1;
-        this. dayExpire = -1;
-
-        this.productName = productName;
-        this.productImage = productImage;
-
-        this.yearBought = yearBought;
-        this.monthBought = monthBought;
-        this.dayBought = dayBought;
-    }
-    // End of Class Constructor (Without warranty)
-
-    @Ignore
-    // Class Constructor (With warranty)
+    // Class Constructor
     public Product(
             String productName,
             Integer productImage,
@@ -85,7 +60,7 @@ public class Product {
             Integer monthExpire,
             Integer dayExpire)
     {
-        //Now we have warranty expiration date, assign those
+
         this.warranty = true;
         this.yearExpire = yearExpire;
         this.monthExpire = monthExpire;
@@ -97,6 +72,9 @@ public class Product {
         this.yearBought = yearBought;
         this.monthBought = monthBought;
         this.dayBought = dayBought;
+
+        //If we have no warranty entered, set all to -99999
+
     }
     // End of Class Constructor (With warranty)
 

@@ -2,6 +2,7 @@ package com.cmpsc475.producttracker.ui.list;
 
 import android.content.ClipData;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,28 +63,31 @@ public class ListFragment extends Fragment {
         recyclerview.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerview.setHasFixedSize(true);
 
-        listAdapter = new ProductListAdapter(getContext(),productArrayList);
+        listAdapter = new ProductListAdapter(getContext(),productArrayList,mProductListViewModel);
         recyclerview.setAdapter(listAdapter);
 
         listAdapter.setOnItemClickListener(new ProductListAdapter.OnItemClickListener(){
             @Override
             public void onItemClick(int position) {
                 Product removeTarget = productArrayList.get(position);
+                Log.d("ListFragment:", String.valueOf(removeTarget));
                 mProductListViewModel.deleteProduct(removeTarget);
             }
 
             @Override
             public void onDeleteClick(int position) {
                 Product removeTarget = productArrayList.get(position);
+                Log.d("ListFragment:", String.valueOf(removeTarget));
                 mProductListViewModel.deleteProduct(removeTarget);
             }
         });
+
 
         mProductListViewModel.getProducts().observe(getViewLifecycleOwner(), products -> {
 
             productArrayList = (ArrayList<Product>) products;
 
-            ProductListAdapter listAdapter = new ProductListAdapter(getContext(),productArrayList);
+            ProductListAdapter listAdapter = new ProductListAdapter(getContext(),productArrayList,mProductListViewModel);
             recyclerview.setAdapter(listAdapter);
             listAdapter.notifyDataSetChanged();
         });

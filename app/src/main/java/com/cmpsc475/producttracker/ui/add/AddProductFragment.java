@@ -65,10 +65,11 @@ public class AddProductFragment extends Fragment {
                 text = (EditText) view.findViewById(R.id.product_name_entry);
                 String productName = text.getText().toString();
 
+                //If we have no warranty entered, set all to -99999
                 int dayExpire = 0;
                 text = (EditText) view.findViewById(R.id.day_expire);
                 if (text.getText().toString().trim().length() <= 0) {
-                    dayExpire = -1;
+                    dayExpire = -99999;
 
                 } else {
                     dayExpire = Integer.parseInt(text.getText().toString());
@@ -78,7 +79,7 @@ public class AddProductFragment extends Fragment {
                 int yearExpire = 0;
                 text = (EditText) view.findViewById(R.id.year_expire);
                 if (text.getText().toString().trim().length() <= 0) {
-                    yearExpire = -1;
+                    yearExpire = -99999;
 
                 } else {
                     yearExpire = Integer.parseInt(text.getText().toString());
@@ -87,7 +88,7 @@ public class AddProductFragment extends Fragment {
                 int monthExpire = 0;
                 text = (EditText) view.findViewById(R.id.month_expire);
                 if (text.getText().toString().trim().length() <= 0) {
-                    monthExpire = -1;
+                    monthExpire = -99999;
 
                 } else {
                     monthExpire = Integer.parseInt(text.getText().toString());
@@ -250,19 +251,7 @@ public class AddProductFragment extends Fragment {
 
 
                 Product newProduct;
-                if (yearExpire == -1 && monthExpire == -1 && dayExpire == -1) {
-                    newProduct = new Product(productName,R.drawable.image_placeholder,yearBought,monthBought,dayBought);
-                    mProductListViewModel.addProduct(newProduct);
 
-                    FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                    transaction.setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out);
-                    transaction.replace(R.id.nav_host_fragment, new ListFragment());
-                    transaction.commit();
-
-                    Toast.makeText(getContext(),"Item added successfully",Toast.LENGTH_LONG).show();
-
-                    return;
-                }
                 newProduct = new Product(productName,R.drawable.image_placeholder,yearBought,monthBought,dayBought,yearExpire,monthExpire,dayExpire);
                 mProductListViewModel.addProduct(newProduct);
 

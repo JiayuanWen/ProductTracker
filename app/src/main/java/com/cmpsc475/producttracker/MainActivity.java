@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.cmpsc475.producttracker.model.Product;
 import com.cmpsc475.producttracker.ui.about.AboutFragment;
@@ -33,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         BottomNavigationView navView = findViewById(R.id.nav_view);
+
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
@@ -41,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
+
+        navView.setVisibility(View.GONE);
 
     }
 
@@ -59,6 +63,11 @@ public class MainActivity extends AppCompatActivity {
                 transaction.setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out);
                 transaction.replace(R.id.nav_host_fragment, new AboutFragment());
                 transaction.commit();
+                break;
+            case R.id.quit_app:
+                finish();
+                System.exit(0);
+                break;
         }
         return super.onOptionsItemSelected(item);
     }

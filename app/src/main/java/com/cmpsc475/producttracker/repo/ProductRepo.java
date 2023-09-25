@@ -43,7 +43,7 @@ public class ProductRepo {
         productArrayList.add(prod4);
     //*/
     public void addSampleData() {
-        Product prod1 = new Product("Seagate 4TB HDD", R.drawable.seagate4tb,2014,8,12);
+        Product prod1 = new Product("Seagate 4TB HDD", R.drawable.seagate4tb,2014,8,12,0,0,0);
         mProductDao.addProduct(prod1);
 
     }
