@@ -99,7 +99,7 @@ public class ListFragment extends Fragment {
             public void onClick(View v) {
                 addProduct.hide();
 
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
                 transaction.setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out);
                 transaction.replace(R.id.fragment_addProduct, new AddProductFragment());
                 transaction.commit();

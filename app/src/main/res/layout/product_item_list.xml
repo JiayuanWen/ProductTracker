@@ -10,7 +10,7 @@
         android:id="@+id/productView"
         android:layout_width="match_parent"
         android:layout_height="180dp"
-        card_view:cardCornerRadius="5dp"
+        card_view:cardCornerRadius="12dp"
         card_view:cardUseCompatPadding="true">
 
         <LinearLayout

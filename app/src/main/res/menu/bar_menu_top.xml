@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="32dp">
 
     <item
         android:id="@+id/aboutApp_bar"
@@ -12,7 +13,6 @@
         android:id="@+id/quit_app"
         android:icon="@drawable/ic_baseline_more_vert_24"
         android:title="Exit app"
-        app:showAsAction="never"
         />
 
 </menu>
