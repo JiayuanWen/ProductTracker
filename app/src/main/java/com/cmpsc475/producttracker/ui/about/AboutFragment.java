@@ -34,13 +34,9 @@ public class AboutFragment extends Fragment {
     private ProductListAdapter listAdapter;
 
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // Show About App fragment
         View root = inflater.inflate(R.layout.fragment_about, container, false);
-
-
-
         return root;
     }
 
@@ -48,5 +44,21 @@ public class AboutFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle saveInstanceState) {
         super.onViewCreated(view, saveInstanceState);
 
+        // Back button handle
+        Button backButton;
+        backButton = view.findViewById(R.id.back_to_list);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Return to product list
+                //FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+                //transaction.setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out);
+                //transaction.replace(R.id.nav_host_fragment, new ListFragment());
+                //transaction.commit();
+                getActivity().getSupportFragmentManager().beginTransaction().setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out);
+                getActivity().getSupportFragmentManager().popBackStack();
+
+            }
+        });
     }
 }

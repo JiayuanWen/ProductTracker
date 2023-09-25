@@ -62,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
                 FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
                 transaction.setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out);
                 transaction.replace(R.id.nav_host_fragment, new AboutFragment());
+                transaction.addToBackStack("fragment_pre");
                 transaction.commit();
                 break;
             case R.id.quit_app:

@@ -39,13 +39,13 @@ public class AddProductFragment extends Fragment {
     private ProductListAdapter listAdapter;
 
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View root = inflater.inflate(R.layout.fragment_addproduct, container, false);
-
+        // Used to add product to database.
         mProductListViewModel = new ViewModelProvider(this).get(ProductListViewModel.class);
 
+        // Display Add Product fragment.
+        View root = inflater.inflate(R.layout.fragment_addproduct, container, false);
         return root;
     }
 
@@ -53,19 +53,33 @@ public class AddProductFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle saveInstanceState) {
         super.onViewCreated(view, saveInstanceState);
 
-        Button confirmAdd;
+        // Handle Cancel button press
+        Button cancelAdd;
+        cancelAdd = view.findViewById(R.id.add_product_cancel);
+        cancelAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Return to product list
+                FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+                transaction.setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out);
+                transaction.replace(R.id.nav_host_fragment, new ListFragment());
+                transaction.commit();
+                //getActivity().getSupportFragmentManager().beginTransaction().setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out);
+                // getActivity().getSupportFragmentManager().popBackStack();
+            }
+        });
 
+        // Handle Add button press
+        Button confirmAdd;
         confirmAdd = view.findViewById(R.id.add_product_confirm);
         confirmAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 EditText text;
-
-
                 text = (EditText) view.findViewById(R.id.product_name_entry);
                 String productName = text.getText().toString();
 
-                //If we have no warranty entered, set all to -99999
+                //If we have no warranty entered, set all to -99999, which will be identified as "N/A" in Warranty status
                 int dayExpire = 0;
                 text = (EditText) view.findViewById(R.id.day_expire);
                 if (text.getText().toString().trim().length() <= 0) {
@@ -74,7 +88,6 @@ public class AddProductFragment extends Fragment {
                 } else {
                     dayExpire = Integer.parseInt(text.getText().toString());
                 }
-
 
                 int yearExpire = 0;
                 text = (EditText) view.findViewById(R.id.year_expire);
@@ -94,9 +107,11 @@ public class AddProductFragment extends Fragment {
                     monthExpire = Integer.parseInt(text.getText().toString());
                 }
 
+
+                // Don't add item if required fields are blank
                 text = (EditText) view.findViewById(R.id.month_bought);
                 if (text.getText().toString().trim().length() <= 0) { //Fail save
-                    FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                    FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
                     transaction.setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out);
                     transaction.replace(R.id.nav_host_fragment, new ListFragment());
                     transaction.commit();
@@ -109,7 +124,7 @@ public class AddProductFragment extends Fragment {
 
                 text = (EditText) view.findViewById(R.id.day_bought);
                 if (text.getText().toString().trim().length() <= 0) {
-                    FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                    FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
                     transaction.setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out);
                     transaction.replace(R.id.nav_host_fragment, new ListFragment());
                     transaction.commit();
@@ -122,7 +137,7 @@ public class AddProductFragment extends Fragment {
 
                 text = (EditText) view.findViewById(R.id.year_bought);
                 if (text.getText().toString().trim().length() <= 0) {
-                    FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                    FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
                     transaction.setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out);
                     transaction.replace(R.id.nav_host_fragment, new ListFragment());
                     transaction.commit();
@@ -133,8 +148,9 @@ public class AddProductFragment extends Fragment {
                 }
                 int yearBought = Integer.parseInt(text.getText().toString());
 
+
                 //Date correction for purchase date
-                if (
+                if ( //Handles 31-day months
                         monthBought == 1 ||
                         monthBought == 3 ||
                         monthBought == 5 ||
@@ -148,7 +164,7 @@ public class AddProductFragment extends Fragment {
                         dayBought = dayBought - 31;
                     }
                 }
-                if (
+                if ( //Handles 30-day months
                         monthBought == 4 ||
                         monthBought == 6 ||
                         monthBought == 9 ||
@@ -160,24 +176,28 @@ public class AddProductFragment extends Fragment {
                     }
                 }
 
+                //Handles Feb on leap year
                 if (yearBought % 400 == 0) {
                     if (monthBought == 2) {
                         if (dayBought > 29) {
                             monthBought++;
                         }
                     }
+                //Handles Feb on non-leap year
                 } else if (yearBought % 100 == 0) {
                     if (monthBought == 2) {
                         if (dayBought > 28) {
                             monthBought++;
                         }
                     }
+                //Handles Feb on leap year
                 } else if (yearBought % 4 == 0) {
                     if (monthBought == 2) {
                         if (dayBought > 29) {
                             monthBought++;
                         }
                     }
+                //Handles Feb on non-leap year
                 } else {
                     if (monthBought == 2) {
                         if (dayBought > 28) {
@@ -249,13 +269,14 @@ public class AddProductFragment extends Fragment {
                     monthExpire = monthExpire - 12;
                 }
 
-
+                //If everyting's good, add to database, return to product list
                 Product newProduct;
 
                 newProduct = new Product(productName,R.drawable.image_placeholder,yearBought,monthBought,dayBought,yearExpire,monthExpire,dayExpire);
                 mProductListViewModel.addProduct(newProduct);
 
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                // Return to product list
+                FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
                 transaction.setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out);
                 transaction.replace(R.id.nav_host_fragment, new ListFragment());
                 transaction.commit();
