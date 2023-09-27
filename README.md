@@ -1,2 +1,5 @@
 # ProductTracker
-Android app for tracking items' time owned and warranty expiration.
+<p align="center">
+  <img src="./README/thumb.png" />
+</p>
+Android app for tracking items' longevity and warranty status.
