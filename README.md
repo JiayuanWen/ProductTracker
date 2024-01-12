@@ -1,4 +1,4 @@
-# ProductTracker
+# Product Tracker
 <p align="center">
   <img src="./README/thumb.png" />
 </p>
